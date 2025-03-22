@@ -1,5 +1,5 @@
 // Configuration: Set to true for static colors, false for random colors
-const useStaticColors = true; // Change this to false for dynamic colors
+const useStaticColors = true;
 
 // Static color palette (customizable)
 const staticColors = {
@@ -44,29 +44,21 @@ function setReadableTextColor(element, bgColor) {
 
 // Apply colors based on mode
 function applyColors() {
-    // Header
     const header = document.querySelector('header');
     if (header) {
         header.style.background = useStaticColors ? staticColors.header : getRandomColor();
         if (!useStaticColors) setReadableTextColor(header, header.style.background);
     }
 
-    // Funky Cards (index.html)
     const funkyCards = document.querySelectorAll('.funky-card');
     funkyCards.forEach((card, index) => {
-        let cardColor;
-        if (useStaticColors) {
-            if (index === 0) cardColor = staticColors.funkyCard1;
-            else if (index === 1) cardColor = staticColors.funkyCard2;
-            else cardColor = staticColors.funkyCard3;
-        } else {
-            cardColor = getRandomColor();
-            setReadableTextColor(card, cardColor);
-        }
+        let cardColor = useStaticColors ? 
+            (index === 0 ? staticColors.funkyCard1 : index === 1 ? staticColors.funkyCard2 : staticColors.funkyCard3) : 
+            getRandomColor();
         card.style.background = cardColor;
+        if (!useStaticColors) setReadableTextColor(card, cardColor);
     });
 
-    // Year Bubbles (schooling.html)
     const yearBubbles = document.querySelectorAll('.year-bubble');
     yearBubbles.forEach(bubble => {
         const bubbleColor = useStaticColors ? staticColors.yearBubble : getRandomColor();
@@ -74,7 +66,6 @@ function applyColors() {
         if (!useStaticColors) setReadableTextColor(bubble, bubbleColor);
     });
 
-    // Month Boxes (schooling.html)
     const monthBoxes = document.querySelectorAll('.month-box');
     monthBoxes.forEach(box => {
         const boxColor = useStaticColors ? staticColors.monthBox : getRandomColor();
@@ -82,39 +73,24 @@ function applyColors() {
         if (!useStaticColors) setReadableTextColor(box, boxColor);
     });
 
-    // Digital Cards (my-digital.html)
     const digitalCards = document.querySelectorAll('.digital-card');
     digitalCards.forEach((card, index) => {
-        let cardColor;
-        if (useStaticColors) {
-            if (index === 0) cardColor = staticColors.digitalCard1;
-            else if (index === 1) cardColor = staticColors.digitalCard2;
-            else if (index === 2) cardColor = staticColors.digitalCard3;
-            else cardColor = staticColors.digitalCard4;
-        } else {
-            cardColor = getRandomColor();
-            setReadableTextColor(card, cardColor);
-        }
+        let cardColor = useStaticColors ? 
+            (index === 0 ? staticColors.digitalCard1 : index === 1 ? staticColors.digitalCard2 : index === 2 ? staticColors.digitalCard3 : staticColors.digitalCard4) : 
+            getRandomColor();
         card.style.background = cardColor;
+        if (!useStaticColors) setReadableTextColor(card, cardColor);
     });
 
-    // Photo Cards (photo-gallery.html)
     const photoCards = document.querySelectorAll('.photo-card');
     photoCards.forEach((card, index) => {
-        let cardColor;
-        if (useStaticColors) {
-            if (index === 0) cardColor = staticColors.photoCard1;
-            else if (index === 1) cardColor = staticColors.photoCard2;
-            else if (index === 2) cardColor = staticColors.photoCard3;
-            else cardColor = staticColors.photoCard4;
-        } else {
-            cardColor = getRandomColor();
-            setReadableTextColor(card, cardColor);
-        }
+        let cardColor = useStaticColors ? 
+            (index === 0 ? staticColors.photoCard1 : index === 1 ? staticColors.photoCard2 : index === 2 ? staticColors.photoCard3 : staticColors.photoCard4) : 
+            getRandomColor();
         card.style.background = cardColor;
+        if (!useStaticColors) setReadableTextColor(card, cardColor);
     });
 
-    // Lock Box (photo-gallery.html)
     const lockBox = document.querySelector('.lock-box');
     if (lockBox) {
         const lockColor = useStaticColors ? staticColors.lockBox : getRandomColor();
@@ -122,7 +98,6 @@ function applyColors() {
         if (!useStaticColors) setReadableTextColor(lockBox, lockColor);
     }
 
-    // Buttons (all pages)
     const buttons = document.querySelectorAll('.card-link, .back-link, .digital-link, .unlock-btn');
     buttons.forEach(button => {
         const buttonColor = useStaticColors ? staticColors.button : getRandomColor();
@@ -134,7 +109,6 @@ function applyColors() {
         }
     });
 
-    // Footer
     const footer = document.querySelector('footer');
     if (footer) {
         footer.style.background = useStaticColors ? staticColors.footer : getRandomColor();
@@ -144,18 +118,24 @@ function applyColors() {
 
 // Page-specific functions
 function toggleYear(yearId) {
+    console.log("Toggling year:", yearId);
     const yearSection = document.getElementById(yearId);
-    if (yearSection.style.display === "flex") {
-        yearSection.style.display = "none";
+    if (yearSection) {
+        if (yearSection.style.display === "flex") {
+            yearSection.style.display = "none";
+        } else {
+            document.querySelectorAll('.month-container').forEach(section => {
+                section.style.display = "none";
+            });
+            yearSection.style.display = "flex";
+        }
     } else {
-        document.querySelectorAll('.month-container').forEach(section => {
-            section.style.display = "none";
-        });
-        yearSection.style.display = "flex";
+        console.error("Year section not found for ID:", yearId);
     }
 }
 
 function checkPassword() {
+    console.log("Checking password...");
     const password = document.getElementById("passwordInput").value;
     const correctPassword = "lily123";
     const padlock = document.getElementById("padlock");
@@ -175,18 +155,46 @@ function checkPassword() {
 
 // Run on page load
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM fully loaded, applying colors and setting up listeners");
     applyColors();
 
+    // Navigation interactivity
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            link.style.animation = 'bounce 0.5s';
+            setTimeout(() => {
+                window.location.href = link.getAttribute('href');
+            }, 500);
+        });
+    });
+
+
+
     if (document.URL.includes("schooling.html")) {
-        document.querySelectorAll('.year-bubble').forEach(bubble => {
+        const yearBubbles = document.querySelectorAll('.year-bubble');
+        console.log("Found year bubbles:", yearBubbles.length);
+        yearBubbles.forEach((bubble, index) => {
+            const yearId = bubble.nextElementSibling ? bubble.nextElementSibling.id : `year${2024 + index}`;
+            console.log("Setting up click for year:", yearId);
             bubble.addEventListener('click', () => {
-                const yearId = bubble.getAttribute('onclick') ? bubble.getAttribute('onclick').match(/'([^']+)'/)[1] : bubble.nextElementSibling.id;
+                console.log("Year bubble clicked, ID:", yearId);
                 toggleYear(yearId);
             });
         });
     }
 
     if (document.URL.includes("photo-gallery.html")) {
-        document.querySelector('.unlock-btn').addEventListener('click', checkPassword);
+        const unlockBtn = document.querySelector('.unlock-btn');
+        if (unlockBtn) {
+            console.log("Unlock button found");
+            unlockBtn.addEventListener('click', () => {
+                console.log("Unlock button clicked");
+                checkPassword();
+            });
+        } else {
+            console.error("Unlock button not found");
+        }
     }
 });
