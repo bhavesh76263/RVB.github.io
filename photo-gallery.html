@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lily’s Photo Fiesta - Lily’s Wild World</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Lily’s Photo Fiesta</h1>
+        <p>Scribbled by Daddy with Lots of Love!</p>
+    </header>
+
+    <!-- Main Content: Locked Gallery -->
+    <main>
+        <section class="gallery-container" id="gallerySection" style="display: none;">
+            <h2>Snapshots of Silliness</h2>
+            <div class="photo-grid">
+                <!-- Photo 1 -->
+                <div class="photo-card">
+                    <img src="https://via.placeholder.com/200" alt="Lily’s goofy face">
+                    <p>Lily’s “I ate too much cake” face—pure sugar shock!</p>
+                </div>
+                <!-- Photo 2 -->
+                <div class="photo-card">
+                    <img src="https://via.placeholder.com/200" alt="Lily dancing">
+                    <p>Caught mid-dance—Lily says, “Wiggle wiggle, world!”</p>
+                </div>
+                <!-- Photo 3 -->
+                <div class="photo-card">
+                    <img src="https://via.placeholder.com/200" alt="Lily with mud">
+                    <p>Mud monster Lily: “Daddy, I’m a swamp queen!”</p>
+                </div>
+                <!-- Photo 4 -->
+                <div class="photo-card">
+                    <img src="https://via.placeholder.com/200" alt="Lily napping">
+                    <p>Snooze mode: “Dreaming of cookies and chaos!”</p>
+                </div>
+            </div>
+            <a href="index.html" class="back-link">Back to the Wild!</a>
+        </section>
+
+        <!-- Lock Screen -->
+        <div class="lock-screen" id="lockScreen">
+            <div class="lock-box">
+                <div class="padlock" id="padlock"></div>
+                <h2>Top Secret Gallery!</h2>
+                <p>Enter the magic word to unlock Lily’s pics!</p>
+                <input type="password" id="passwordInput" placeholder="Hint: It’s lily123">
+                <button onclick="checkPassword()" class="unlock-btn">Unlock the Fun!</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Lily’s Wild World | Daddy’s Funky Tales</p>
+    </footer>
+
+    <!-- JavaScript for Lock/Unlock -->
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("passwordInput").value;
+            const correctPassword = "lily123";
+            const padlock = document.getElementById("padlock");
+
+            if (password === correctPassword) {
+                padlock.classList.add("unlock-animation");
+                setTimeout(() => {
+                    document.getElementById("lockScreen").style.display = "none";
+                    document.getElementById("gallerySection").style.display = "block";
+                }, 1000); // Wait for animation to finish
+            } else {
+                padlock.classList.add("shake");
+                setTimeout(() => padlock.classList.remove("shake"), 500);
+                alert("Nope! Try again, silly goose!");
+            }
+        }
+    </script>
+</body>
+</html>

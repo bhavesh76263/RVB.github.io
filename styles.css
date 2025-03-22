@@ -252,3 +252,257 @@ footer {
     border-radius: 10px;
     border: 3px dashed #ff3366;
 }
+
+
+/* Digital Section */
+.digital-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+}
+
+.digital-container h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2b2b2b;
+    text-shadow: 3px 3px #ffd700;
+    transform: rotate(-4deg);
+    margin-bottom: 30px;
+}
+
+.digital-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.digital-card {
+    width: 300px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ff99cc, #ff6699);
+    border: 5px dashed #2b2b2b;
+    border-radius: 20px;
+    transform: rotate(3deg);
+    transition: transform 0.3s;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.digital-card:nth-child(2) {
+    background: linear-gradient(135deg, #66ff99, #33cccc);
+    transform: rotate(-2deg);
+}
+
+.digital-card:nth-child(3) {
+    background: linear-gradient(135deg, #9999ff, #ff99ff);
+    transform: rotate(1deg);
+}
+
+.digital-card:nth-child(4) {
+    background: linear-gradient(135deg, #ffcc66, #ff9966);
+    transform: rotate(-3deg);
+}
+
+.digital-card:hover {
+    transform: scale(1.05) rotate(0deg);
+}
+
+.digital-card h3 {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2b2b2b;
+    text-shadow: 2px 2px #fff;
+    margin-bottom: 10px;
+}
+
+.digital-card p {
+    font-size: 20px;
+    color: #2b2b2b;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.digital-card iframe {
+    border-radius: 10px;
+    border: 3px solid #ff3366;
+}
+
+.digital-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #ff3366;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 3px 3px #2b2b2b;
+}
+
+.digital-link:hover {
+    background-color: #ff6699;
+}
+
+
+
+/* Gallery Section */
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+}
+
+.gallery-container h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2b2b2b;
+    text-shadow: 3px 3px #ffd700;
+    transform: rotate(-4deg);
+    margin-bottom: 30px;
+}
+
+.photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.photo-card {
+    width: 250px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffcc66, #ff9966);
+    border: 5px dashed #2b2b2b;
+    border-radius: 15px;
+    transform: rotate(2deg);
+    transition: transform 0.3s;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.photo-card:nth-child(2) {
+    background: linear-gradient(135deg, #66ff99, #33cccc);
+    transform: rotate(-3deg);
+}
+
+.photo-card:nth-child(3) {
+    background: linear-gradient(135deg, #9999ff, #ff99ff);
+    transform: rotate(1deg);
+}
+
+.photo-card:nth-child(4) {
+    background: linear-gradient(135deg, #ff99cc, #ff6699);
+    transform: rotate(-2deg);
+}
+
+.photo-card:hover {
+    transform: scale(1.1) rotate(0deg);
+}
+
+.photo-card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    border: 3px solid #ff3366;
+}
+
+.photo-card p {
+    font-size: 20px;
+    color: #2b2b2b;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Lock Screen */
+.lock-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lock-box {
+    background: linear-gradient(45deg, #ff66b2, #66ffcc);
+    padding: 40px;
+    border: 6px solid #2b2b2b;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.padlock {
+    width: 80px;
+    height: 80px;
+    background: url('https://via.placeholder.com/80?text=🔒') no-repeat center;
+    margin: 0 auto 20px;
+    transition: transform 0.5s;
+}
+
+.padlock.unlock-animation {
+    animation: unlock 1s forwards;
+}
+
+.padlock.shake {
+    animation: shake 0.5s;
+}
+
+.lock-box h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2b2b2b;
+    text-shadow: 2px 2px #ffd700;
+}
+
+.lock-box p {
+    font-size: 20px;
+    color: #2b2b2b;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.lock-box input {
+    padding: 10px;
+    font-size: 18px;
+    border: 3px dashed #ff3366;
+    border-radius: 10px;
+    margin: 10px 0;
+    width: 200px;
+}
+
+.unlock-btn {
+    padding: 12px 25px;
+    background-color: #ff3366;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 3px 3px #2b2b2b;
+    cursor: pointer;
+}
+
+.unlock-btn:hover {
+    background-color: #ff6699;
+}
+
+/* Animations */
+@keyframes unlock {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg) translateY(-100px); opacity: 0; }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
