@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lily’s Schooling Shenanigans - Lily’s Wild World</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Lily’s Schooling Shenanigans</h1>
+        <p>Scribbled by Daddy with Lots of Love!</p>
+    </header>
+
+    <!-- Main Content: Schooling Timeline -->
+    <main>
+        <section class="timeline">
+            <h2>School Years of Chaos & Fun!</h2>
+            <div class="year-container">
+                <!-- Year 2024 -->
+                <div class="year-bubble" onclick="toggleYear('year2024')">
+                    <h3>2024</h3>
+                </div>
+                <div id="year2024" class="month-container">
+                    <div class="month-box">
+                        <h4>September</h4>
+                        <p>First day of preschool! Lily painted her hands (and my shirt) blue. Epic start!</p>
+                        <img src="https://via.placeholder.com/150" alt="Blue hands">
+                    </div>
+                    <div class="month-box">
+                        <h4>October</h4>
+                        <p>Learned “A is for Apple” but insists it’s “A is for Ants.” Ant parade ensued!</p>
+                        <img src="https://via.placeholder.com/150" alt="Ant parade">
+                    </div>
+                    <div class="month-box">
+                        <h4>November</h4>
+                        <p>Turkey craft day—Lily glued feathers to her nose. Gobble gobble!</p>
+                        <img src="https://via.placeholder.com/150" alt="Feather nose">
+                    </div>
+                </div>
+
+                <!-- Year 2025 -->
+                <div class="year-bubble" onclick="toggleYear('year2025')">
+                    <h3>2025</h3>
+                </div>
+                <div id="year2025" class="month-container" style="display: none;">
+                    <div class="month-box">
+                        <h4>January</h4>
+                        <p>Snowflake art! Lily ate the glitter—sparkly burps all day!</p>
+                        <img src="https://via.placeholder.com/150" alt="Glitter burps">
+                    </div>
+                    <div class="month-box">
+                        <h4>February</h4>
+                        <p>Valentine’s chaos—Lily traded cards for cookies. Love is food!</p>
+                        <img src="https://via.placeholder.com/150" alt="Cookie trade">
+                    </div>
+                    <div class="month-box">
+                        <h4>March</h4>
+                        <p>St. Paddy’s Day—Lily hunted for “leprechaun gold” (goldfish crackers).</p>
+                        <img src="https://via.placeholder.com/150" alt="Goldfish hunt">
+                    </div>
+                </div>
+            </div>
+            <a href="index.html" class="back-link">Back to the Wild!</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Lily’s Wild World | Daddy’s Funky Tales</p>
+    </footer>
+
+    <!-- Simple JavaScript for Toggle -->
+    <script>
+        function toggleYear(yearId) {
+            const yearSection = document.getElementById(yearId);
+            if (yearSection.style.display === "flex") {
+                yearSection.style.display = "none";
+            } else {
+                document.querySelectorAll('.month-container').forEach(section => {
+                    section.style.display = "none";
+                });
+                yearSection.style.display = "flex";
+            }
+        }
+    </script>
+</body>
+</html>
