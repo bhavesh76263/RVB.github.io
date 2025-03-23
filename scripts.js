@@ -137,7 +137,7 @@ function toggleYear(yearId) {
 function checkPassword() {
     console.log("Checking password...");
     const password = document.getElementById("passwordInput").value;
-    const correctPassword = "lily123";
+    const correctPassword = "aarvi123";
     const padlock = document.getElementById("padlock");
 
     if (password === correctPassword) {
