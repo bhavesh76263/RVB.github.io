@@ -77,6 +77,27 @@
             transform: scale(1.1) translateY(-3px);
         }
 
+        .contact-btn {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s, background-color 0.3s;
+            background-color: #ffcccc;
+            color: #cc3333;
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.1) translateY(-3px);
+        }
+
         /* Main Content Styles (Scoped to .homepage-wrapper) */
         .homepage-wrapper .card-container {
             position: relative;
@@ -463,7 +484,7 @@
         /* Footer Styles */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             background: linear-gradient(135deg, #ffebcc, #ffd699);
             border-top: 4px dashed #ff3366;
             box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
@@ -473,139 +494,312 @@
             font-family: 'Caveat', cursive;
             font-size: 20px;
             color: #2b2b2b;
-            margin: 0;
+            margin: 0 0 10px 0;
         }
-        /* Footer Styles */
-footer {
-    text-align: center;
-    padding: 30px 20px;
-    background: linear-gradient(135deg, #ffebcc, #ffd699);
-    border-top: 4px dashed #ff3366;
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-}
 
-footer p {
-    font-family: 'Caveat', cursive;
-    font-size: 20px;
-    color: #2b2b2b;
-    margin: 0 0 10px 0;
-}
+        .social-icons {
+            margin-top: 15px;
+        }
 
-.social-icons {
-    margin-top: 15px;
-}
+        .funny-text {
+            font-family: 'Caveat', cursive;
+            font-size: 18px;
+            color: #ff3366;
+            margin: 0 0 10px 0;
+            line-height: 1.4;
+        }
 
-.funny-text {
-    font-family: 'Caveat', cursive;
-    font-size: 18px;
-    color: #ff3366;
-    margin: 0 0 10px 0;
-    line-height: 1.4;
-}
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
 
-.icon-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
+        .social-link {
+            background: linear-gradient(135deg, #ffccff, #ffb3ff);
+            border: 2px dashed #2b2b2b;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: wiggle 2s infinite;
+        }
 
-.social-link {
-    background: linear-gradient(135deg, #ffccff, #ffb3ff);
-    border: 2px dashed #2b2b2b;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    animation: wiggle 2s infinite;
-}
+        .social-link i {
+            font-size: 20px;
+            color: #2b2b2b;
+        }
 
-.social-link i {
-    font-size: 20px;
-    color: #2b2b2b;
-}
+        .social-link:hover {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+        }
 
-.social-link:hover {
-    transform: scale(1.2) rotate(5deg);
-    box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
-}
+        .social-link:nth-child(1) {
+            animation-delay: 0s;
+        }
 
-.social-link:nth-child(1) {
-    animation-delay: 0s;
-}
+        .social-link:nth-child(2) {
+            animation-delay: 0.2s;
+        }
 
-.social-link:nth-child(2) {
-    animation-delay: 0.2s;
-}
+        .social-link:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
-.social-link:nth-child(3) {
-    animation-delay: 0.4s;
-}
-/* Social Pop-up Styles */
-.social-popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #ffccff, #ffb3ff);
-    border: 3px dashed #2b2b2b;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    animation: bounceIn 0.5s ease;
-}
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
 
-.social-popup-content {
-    padding: 20px;
-    text-align: center;
-}
+        /* Social Pop-up Styles */
+        .social-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ffccff, #ffb3ff);
+            border: 3px dashed #2b2b2b;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            animation: bounceIn 0.5s ease;
+        }
 
-.social-popup-content p {
-    font-family: 'Caveat', cursive;
-    font-size: 20px;
-    color: #ff3366;
-    margin: 0 0 15px 0;
-    line-height: 1.4;
-}
+        .social-popup-content {
+            padding: 20px;
+            text-align: center;
+        }
 
-.close-social-btn {
-    background: #ff3366;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 15px;
-    font-family: 'Caveat', cursive;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
+        .social-popup-content p {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            color: #ff3366;
+            margin: 0 0 15px 0;
+            line-height: 1.4;
+        }
 
-.close-social-btn:hover {
-    transform: scale(1.05);
-}
+        .close-social-btn {
+            background: #ff3366;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-family: 'Caveat', cursive;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
 
-@keyframes bounceIn {
-    0% {
-        transform: translate(-50%, -50%) scale(0.5);
-        opacity: 0;
-    }
-    60% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1);
-    }
-}
+        .close-social-btn:hover {
+            transform: scale(1.05);
+        }
 
-@keyframes wiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    75% { transform: rotate(-5deg); }
-}
+        @keyframes bounceIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            60% {
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /* Magic Mailbox Contact Form Styles */
+        .contact-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ffcccc, #ffb3b3);
+            border: 3px dashed #2b2b2b;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            width: 400px;
+            animation: bounceIn 0.5s ease;
+        }
+
+        .contact-content {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-content h3 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 24px;
+            color: #cc3333;
+            margin-bottom: 15px;
+        }
+
+        .mailbox {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: #ff3366;
+            border: 3px dashed #2b2b2b;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .mailbox::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: #ff3366;
+            border: 3px dashed #2b2b2b;
+            border-bottom: none;
+            border-radius: 15px 15px 0 0;
+            transition: transform 0.5s ease;
+        }
+
+        .mailbox.open::before {
+            transform: translateX(-50%) rotate(-90deg);
+        }
+
+        .mailbox i {
+            font-size: 40px;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .doodles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .doodle-star, .doodle-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: wiggle 3s infinite;
+        }
+
+        .doodle-star {
+            top: 5px;
+            left: 10px;
+            color: #ffd700;
+        }
+
+        .doodle-heart {
+            bottom: 5px;
+            right: 10px;
+            color: #ff3366;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            padding: 10px;
+            border: 2px dashed #2b2b2b;
+            border-radius: 10px;
+            font-family: 'Caveat', cursive;
+            font-size: 16px;
+            color: #cc3333;
+            background: #fff;
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: none;
+            height: 100px;
+        }
+
+        .contact-form button {
+            background: #cc3333;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-family: 'Caveat', cursive;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .contact-form button:hover {
+            transform: scale(1.05);
+        }
+
+        .flying-letter {
+            position: absolute;
+            font-size: 20px;
+            color: #ffd700;
+            opacity: 0;
+            animation: flyToMailbox 1s ease forwards;
+        }
+
+        @keyframes flyToMailbox {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-150px, -100px) rotate(360deg);
+            }
+        }
+
+        .speech-bubble {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ffebcc, #ffd699);
+            border: 2px dashed #2b2b2b;
+            border-radius: 15px;
+            padding: 10px 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+        }
+
+        .speech-bubble p {
+            font-family: 'Caveat', cursive;
+            font-size: 16px;
+            color: #ff9933;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #ffebcc;
+        }
     </style>
 </head>
 <body>
@@ -646,6 +840,9 @@ footer p {
                 <a href="drawing.html" class="nav-link" style="background-color: #e6e6ff; color: #9933cc;">
                     <i class="fas fa-paint-brush"></i> Drawing Board
                 </a>
+                <div class="contact-btn" onclick="showContactPopup()">
+                    <i class="fas fa-envelope"></i> Contact Me
+                </div>
             </nav>
         </div>
     </header>
@@ -699,31 +896,60 @@ footer p {
     </main>
 
     <!-- Footer -->
-<footer>
-    <p>© 2025 Aarvi’s Wild World | Daddy’s Funky Tales</p>
-    <div class="social-icons">
-        <p class="funny-text">I’m only 3, so no social media for me! Papa says I can have cookies instead 🍪 Follow him for my adventures!</p>
-        <div class="icon-container">
-            <a href="https://www.facebook.com" class="social-link" onclick="showSocialPopup(event)">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.linkedin.com" class="social-link" onclick="showSocialPopup(event)">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://www.twitter.com" class="social-link" onclick="showSocialPopup(event)">
-                <i class="fab fa-twitter"></i>
-            </a>
+    <footer>
+        <p>© 2025 Aarvi’s Wild World | Daddy’s Funky Tales</p>
+        <div class="social-icons">
+            <p class="funny-text">I’m only 3, so no social media for me! Papa says I can have cookies instead 🍪 Follow him for my adventures!</p>
+            <div class="icon-container">
+                <a href="https://www.facebook.com" class="social-link" onclick="showSocialPopup(event)">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.linkedin.com" class="social-link" onclick="showSocialPopup(event)">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.twitter.com" class="social-link" onclick="showSocialPopup(event)">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Social Pop-up -->
+    <div class="social-popup" id="socialPopup">
+        <div class="social-popup-content">
+            <p>बोला तो सही कि मेरा अकाउंट नहीं बन सकता, मैं अभी छोटी हूँ 😊</p>
+            <button class="close-social-btn" onclick="closeSocialPopup()">Close</button>
         </div>
     </div>
-</footer>
 
-<!-- Social Pop-up -->
-<div class="social-popup" id="socialPopup">
-    <div class="social-popup-content">
-        <p>बोला तो सही कि मेरा अकाउंट नहीं बन सकता, मैं अभी छोटी हूँ 😊</p>
-        <button class="close-social-btn" onclick="closeSocialPopup()">Close</button>
+    <!-- Contact Pop-up (Magic Mailbox) -->
+    <div class="contact-popup" id="contactPopup">
+        <div class="contact-content">
+            <h3>Aarvi’s Magic Mailbox 📬</h3>
+            <div class="mailbox" id="mailbox">
+                <i class="fas fa-envelope"></i>
+                <div class="doodles">
+                    <span class="doodle-star">✨</span>
+                    <span class="doodle-heart">💖</span>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm" onsubmit="submitContactForm(event)">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <select name="messageType" required>
+                    <option value="" disabled selected>Message Type</option>
+                    <option value="cookie-recipe">Kitty party 🍪</option>
+                    <option value="hug-request">Birthday Wish 🥰</option>
+                    <option value="rainbow-wish">Play to Park 🌈</option>
+                </select>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Letter!</button>
+            </form>
+            <div class="speech-bubble" id="speechBubble">
+                <p>Yay, I got your letter! I’ll tell Papa to read it! 📬💖</p>
+            </div>
+        </div>
     </div>
-</div>
 
     <!-- WhatsApp Chat Icon -->
     <div class="whatsapp-icon" onclick="showChatPopup()">
@@ -760,15 +986,15 @@ footer p {
                 <span>1 UNREAD MESSAGE</span>
             </div>
             <div class="chat-message incoming">
-                अरे, मैंने सोचा कि आज पार्क में जायें? 🕔
+                अरे, मैंने सोचा आज तुमसे मिलूँ! शाम को समय है? 🕔
                 <span class="timestamp">17:00</span>
             </div>
             <div class="chat-message outgoing">
-                हाहा, मैंने पापा से पूछा तो वो बोले, "आरवी, तुम्हें चॉकलेट खानी है ना?" 🍫 ये घरवाले कैसे भी मना लेते हैं ना! 😊
+                हाहा, मैंने पापा से पूछा तो वो बोले, "आरवी, तुम्हें चॉकलेट खानी है ना? चैट बाद में!" 🍫
                 <span class="timestamp">17:01</span>
             </div>
             <div class="chat-message custom">
-                मेरे पापा मना कर रहे हैं!😊
+                माय पापा डज नॉट अलाउ दिस 😊
                 <button onclick="goToDrawing()">Draw with me instead! 🎨</button>
                 <span class="timestamp">17:02</span>
             </div>
@@ -788,11 +1014,17 @@ footer p {
         <source src="https://www.myinstants.com/media/sounds/giggle.mp3" type="audio/mp3">
     </audio>
 
-    <!-- JavaScript for Chat Pop-up -->
+    <!-- JavaScript for Chat Pop-up, Social Pop-up, and Contact Pop-up -->
     <script>
         const chatPopup = document.getElementById('chatPopup');
+        const socialPopup = document.getElementById('socialPopup');
+        const contactPopup = document.getElementById('contactPopup');
+        const speechBubble = document.getElementById('speechBubble');
+        const mailbox = document.getElementById('mailbox');
+        const messageInput = document.querySelector('.contact-form textarea');
         const giggleSound = document.getElementById('giggleSound');
 
+        // WhatsApp Chat Pop-up Functions
         function showChatPopup() {
             giggleSound.currentTime = 0;
             giggleSound.play();
@@ -815,23 +1047,77 @@ footer p {
         }
 
         // Social Pop-up Functions
-const socialPopup = document.getElementById('socialPopup');
+        function showSocialPopup(event) {
+            event.preventDefault();
+            giggleSound.currentTime = 0;
+            giggleSound.play();
+            socialPopup.style.display = 'block';
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.5, x: 0.5 }
+            });
+        }
 
-function showSocialPopup(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    giggleSound.currentTime = 0;
-    giggleSound.play();
-    socialPopup.style.display = 'block';
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.5, x: 0.5 }
-    });
-}
+        function closeSocialPopup() {
+            socialPopup.style.display = 'none';
+        }
 
-function closeSocialPopup() {
-    socialPopup.style.display = 'none';
-}
+        // Contact Pop-up (Magic Mailbox) Functions
+        function showContactPopup() {
+            giggleSound.currentTime = 0;
+            giggleSound.play();
+            contactPopup.style.display = 'block';
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.5, x: 0.5 }
+            });
+        }
+
+        function closeContactPopup() {
+            contactPopup.style.display = 'none';
+            speechBubble.style.display = 'none';
+            mailbox.classList.remove('open');
+            document.getElementById('contactForm').reset();
+        }
+
+        messageInput.addEventListener('input', (e) => {
+            if (e.target.value.length > 0) {
+                const letter = document.createElement('div');
+                letter.className = 'flying-letter';
+                letter.textContent = '✉️';
+                letter.style.left = `${messageInput.offsetLeft + messageInput.offsetWidth / 2}px`;
+                letter.style.top = `${messageInput.offsetTop + messageInput.offsetHeight}px`;
+                contactPopup.appendChild(letter);
+                setTimeout(() => letter.remove(), 1000);
+            }
+        });
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                messageType: formData.get('messageType'),
+                message: formData.get('message')
+            };
+            console.log('Form Submitted:', data); // Replace with actual form submission logic (e.g., EmailJS)
+
+            mailbox.classList.add('open');
+            giggleSound.currentTime = 0;
+            giggleSound.play();
+            confetti({
+                particleCount: 150,
+                spread: 90,
+                origin: { y: 0.5, x: 0.5 }
+            });
+            speechBubble.style.display = 'block';
+            setTimeout(() => {
+                closeContactPopup();
+            }, 3000);
+        }
     </script>
 </body>
 </html>
