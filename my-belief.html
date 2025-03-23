@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Belief - Lily’s Wild World</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assumes linking to existing styles.css -->
+    <style>
+        /* Additional Styles for My Belief Page */
+        .belief-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .belief-container h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 40px;
+            color: #2b2b2b;
+            text-shadow: 3px 3px #ffd700;
+            transform: rotate(-4deg);
+            margin-bottom: 40px;
+        }
+
+        .belief-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .belief-card {
+            min-width: 200px; /* Minimum width to ensure readability */
+            max-width: 400px; /* Maximum width to keep it manageable */
+            width: fit-content; /* Adapts to content width */
+            height: auto; /* Adapts to content height */
+            background: linear-gradient(135deg, #ff99cc, #ff6699);
+            border: 6px dashed #2b2b2b;
+            border-radius: 20px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+            padding: 20px; /* Padding to give text breathing room */
+            overflow: hidden;
+        }
+
+        /* Different gradients for each card */
+        .belief-card:nth-child(2) {
+            background: linear-gradient(135deg, #66ff99, #33cccc);
+        }
+
+        .belief-card:nth-child(3) {
+            background: linear-gradient(135deg, #9999ff, #ff99ff);
+        }
+
+        /* 3D Effect on Hover */
+        .belief-card:hover {
+            transform: rotateX(10deg) rotateY(10deg) scale(1.1);
+            box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .belief-card:active {
+            transform: rotateX(0deg) rotateY(0deg) scale(0.95);
+        }
+
+        /* Embossed Text Effect with Flexible Sizing */
+        .belief-text {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(24px, 4vw, 36px); /* Scales between 24px and 36px based on viewport */
+            color: #fff;
+            text-align: center;
+            position: relative; /* Removed absolute positioning for natural flow */
+            text-shadow: 
+                2px 2px 4px #ff3366, 
+                -1px -1px 2px rgba(0, 0, 0, 0.5), 
+                1px 1px 2px rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s, text-shadow 0.3s;
+            padding: 10px;
+            line-height: 1.2;
+            word-wrap: break-word; /* Ensures long text wraps */
+        }
+
+        .belief-card:hover .belief-text {
+            transform: scale(1.1);
+            text-shadow: 
+                3px 3px 6px #ff3366, 
+                -2px -2px 3px rgba(0, 0, 0, 0.6), 
+                2px 2px 3px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Wobble Animation */
+        .wobble {
+            animation: wobble 0.8s ease;
+        }
+
+        @keyframes wobble {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg) scale(1.1); }
+            50% { transform: rotate(5deg) scale(1.05); }
+            75% { transform: rotate(-3deg) scale(1.1); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>My Belief</h1>
+        <p>Scribbled by Daddy with Lots of Love!</p>
+    </header>
+
+    <!-- Main Content: Belief Cards -->
+    <main>
+        <section class="belief-container">
+            <h2>Aarvi's Funky Beliefs!</h2>
+            <div class="belief-grid">
+                <!-- Card 1 -->
+                <div class="belief-card">
+                    <div class="belief-text">I don’t care what others feel</div>
+                </div>
+                <!-- Card 2 -->
+                <div class="belief-card">
+                    <div class="belief-text">I find fun everywhere</div>
+                </div>
+                <!-- Card 3 -->
+                <div class="belief-card">
+                    <div class="belief-text">I live in the now 😄✨
+                        I don't know what the past is... or the future! 🤷‍♂️🕰️
+                        I'm just busy being happy! 🌈💫</div>
+                </div>
+            </div>
+            <a href="index.html" class="back-link">Back to the Wild!</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Lily’s Wild World | Daddy’s Funky Tales</p>
+    </footer>
+
+    <!-- JavaScript for Interaction -->
+    <script src="scripts.js"></script> <!-- Assumes linking to existing scripts.js -->
+    <script>
+        // Add wobble animation on click
+        document.querySelectorAll('.belief-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const text = card.querySelector('.belief-text');
+                text.classList.add('wobble');
+                setTimeout(() => text.classList.remove('wobble'), 800); // Remove after animation
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'924d919ecd65dd1c',t:'MTc0MjcyOTEzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

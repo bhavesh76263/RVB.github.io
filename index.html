@@ -5,55 +5,833 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lily’s Wild World</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts for Permanent Marker and Caveat -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Confetti.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        /* Header Styles (Scoped to .homepage-header) */
+        .homepage-header {
+            background: linear-gradient(135deg, #ffebcc, #ffd699);
+            padding: 20px 40px;
+            margin: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 4px dashed #ff3366;
+        }
+
+        .homepage-header .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .homepage-header h1 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 40px;
+            margin: 0;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ffccff, #ffb3ff);
+            border: 3px dashed #2b2b2b;
+            border-radius: 15px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .homepage-header h1:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .homepage-header h1 i {
+            font-size: 35px;
+        }
+
+        .homepage-header .funky-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .homepage-header .nav-link {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .homepage-header .nav-link:hover {
+            transform: scale(1.1) translateY(-3px);
+        }
+
+        /* Main Content Styles (Scoped to .homepage-wrapper) */
+        .homepage-wrapper .card-container {
+            position: relative;
+            height: 600px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .homepage-wrapper .funky-card {
+            position: absolute;
+            min-width: 200px;
+            max-width: 350px;
+            width: fit-content;
+            height: auto;
+            border: 3px dashed #2b2b2b;
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .homepage-wrapper .funky-card:nth-child(1) {
+            top: 20px;
+            left: 10%;
+            transform: rotate(-5deg);
+        }
+
+        .homepage-wrapper .funky-card:nth-child(2) {
+            top: 150px;
+            left: 40%;
+            transform: rotate(3deg);
+        }
+
+        .homepage-wrapper .funky-card:nth-child(3) {
+            top: 300px;
+            left: 20%;
+            transform: rotate(-2deg);
+        }
+
+        .homepage-wrapper .funky-card:nth-child(4) {
+            top: 100px;
+            left: 60%;
+            transform: rotate(4deg);
+        }
+
+        .homepage-wrapper .funky-card:nth-child(5) {
+            top: 350px;
+            left: 50%;
+            transform: rotate(-6deg);
+        }
+
+        .homepage-wrapper .funky-card:nth-child(6) {
+            top: 200px;
+            left: 15%;
+            transform: rotate(2deg);
+        }
+
+        .homepage-wrapper .funky-card:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 1;
+        }
+
+        .homepage-wrapper .funky-card h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .homepage-wrapper .funky-card p {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(18px, 3vw, 22px);
+            line-height: 1.5;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .homepage-wrapper .card-link {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .homepage-wrapper .card-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .homepage-wrapper .card-icon.square-shadow {
+            border-radius: 0;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .homepage-wrapper .card-icon.round-border-shadow {
+            border-radius: 50%;
+            border: 4px solid #ff3366;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+        }
+
+        .homepage-wrapper .card-icon.square-tilt-shadow {
+            border-radius: 0;
+            transform: rotate(5deg);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .homepage-wrapper .card-icon.round-glow {
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ffd700, 0 0 25px #ff99cc;
+            padding: 10px;
+        }
+
+        .homepage-wrapper .card-icon.square-dashed-shadow {
+            border-radius: 0;
+            border: 3px dashed #33cccc;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+        }
+
+        .homepage-wrapper .card-icon.round-border-glow {
+            border-radius: 50%;
+            border: 3px solid #66ff99;
+            box-shadow: 0 0 15px #66ff99, 0 0 25px #33cccc;
+            padding: 10px;
+        }
+
+        /* WhatsApp Chat Icon Styles */
+        .whatsapp-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ccffcc, #b3ffb3);
+            border: 3px dashed #2b2b2b;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-icon i {
+            font-size: 30px;
+            color: #33cc33;
+        }
+
+        .whatsapp-icon:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* WhatsApp Chat Pop-up Styles */
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background: #e5ddd5 url('https://www.whatsapp.com/img/whatsapp-background.png') repeat;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Chat Header */
+        .chat-header {
+            background: #075e54;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header .profile-pic {
+            width: 40px;
+            height: 40px;
+            background: #ccc;
+            border-radius: 50%;
+        }
+
+        .chat-header .chat-info {
+            flex: 1;
+        }
+
+        .chat-header .chat-info h3 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .chat-header .chat-info p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .chat-header i {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Chat Body */
+        .chat-body {
+            padding: 10px;
+            height: calc(100% - 110px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Date Separator */
+        .date-separator {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .date-separator span {
+            background: #fff;
+            padding: 2px 10px;
+            border-radius: 10px;
+        }
+
+        /* Chat Bubbles */
+        .chat-message {
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .chat-message.incoming {
+            background: #fff;
+            align-self: flex-start;
+        }
+
+        .chat-message.outgoing {
+            background: #dcf8c6;
+            align-self: flex-end;
+        }
+
+        .chat-message .timestamp {
+            font-size: 10px;
+            color: #666;
+            text-align: right;
+        }
+
+        .chat-message.outgoing .timestamp {
+            color: #34b7f1;
+        }
+
+        /* Unread Message Indicator */
+        .unread-indicator {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 12px;
+            color: #34b7f1;
+            position: relative;
+        }
+
+        .unread-indicator::before,
+        .unread-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #34b7f1;
+        }
+
+        .unread-indicator::before {
+            left: 0;
+        }
+
+        .unread-indicator::after {
+            right: 0;
+        }
+
+        .unread-indicator span {
+            background: #e5ddd5;
+            padding: 0 10px;
+        }
+
+        /* Custom Message for Drawing Board */
+        .chat-message.custom {
+            background: #fff;
+            align-self: flex-start;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .chat-message.custom button {
+            background: #ff3366;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-family: 'Caveat', cursive;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .chat-message.custom button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Close Button */
+        .close-chat-btn {
+            background: #ff3366;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-family: 'Caveat', cursive;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .close-chat-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Chat Input (Non-functional) */
+        .chat-input {
+            background: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .chat-input i {
+            font-size: 20px;
+            color: #666;
+        }
+
+        .chat-input .send-btn {
+            color: #075e54;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffebcc, #ffd699);
+            border-top: 4px dashed #ff3366;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            color: #2b2b2b;
+            margin: 0;
+        }
+        /* Footer Styles */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #ffebcc, #ffd699);
+    border-top: 4px dashed #ff3366;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+}
+
+footer p {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: #2b2b2b;
+    margin: 0 0 10px 0;
+}
+
+.social-icons {
+    margin-top: 15px;
+}
+
+.funny-text {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: #ff3366;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-link {
+    background: linear-gradient(135deg, #ffccff, #ffb3ff);
+    border: 2px dashed #2b2b2b;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: wiggle 2s infinite;
+}
+
+.social-link i {
+    font-size: 20px;
+    color: #2b2b2b;
+}
+
+.social-link:hover {
+    transform: scale(1.2) rotate(5deg);
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+}
+
+.social-link:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.social-link:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.social-link:nth-child(3) {
+    animation-delay: 0.4s;
+}
+/* Social Pop-up Styles */
+.social-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #ffccff, #ffb3ff);
+    border: 3px dashed #2b2b2b;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    animation: bounceIn 0.5s ease;
+}
+
+.social-popup-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.social-popup-content p {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: #ff3366;
+    margin: 0 0 15px 0;
+    line-height: 1.4;
+}
+
+.close-social-btn {
+    background: #ff3366;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-family: 'Caveat', cursive;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.close-social-btn:hover {
+    transform: scale(1.05);
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    75% { transform: rotate(-5deg); }
+}
+    </style>
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header class="homepage-header">
         <div class="nav-container">
-            <h1>Aarvi’s World</h1>
+            <h1 style="color: #ff3366;">
+                <i class="fas fa-star" style="color: #ff3366;"></i> Aarvi’s World
+            </h1>
             <nav class="funky-nav">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="blog-post.html" class="nav-link">Blog</a>
-                <a href="my-digital.html" class="nav-link">My Digital</a>
-                <a href="photo-gallery.html" class="nav-link">Gallery</a>
-                <a href="schooling.html" class="nav-link">Schooling</a>
-                <a href="fill-the-blank.html" class="nav-link">Fill-the-Blank</a>
+                <a href="index.html" class="nav-link" style="background-color: #ffccff; color: #ff3366;">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="blog-post.html" class="nav-link" style="background-color: #ccffcc; color: #33cc33;">
+                    <i class="fas fa-blog"></i> Blog
+                </a>
+                <a href="my-digital.html" class="nav-link" style="background-color: #ccffff; color: #3399ff;">
+                    <i class="fas fa-cookie-bite"></i> My Digital
+                </a>
+                <a href="photo-gallery.html" class="nav-link" style="background-color: #ffebcc; color: #ff9933;">
+                    <i class="fas fa-camera"></i> Gallery
+                </a>
+                <a href="schooling.html" class="nav-link" style="background-color: #ffcccc; color: #cc3333;">
+                    <i class="fas fa-school"></i> Schooling
+                </a>
+                <a href="fill-the-blank.html" class="nav-link" style="background-color: #e6e6ff; color: #9933cc;">
+                    <i class="fas fa-pen"></i> Fill-the-Blank
+                </a>
+                <a href="my-belief.html" class="nav-link" style="background-color: #ffccff; color: #ff3366;">
+                    <i class="fas fa-heart"></i> My Belief
+                </a>
+                <a href="sticky-notes.html" class="nav-link" style="background-color: #ccffcc; color: #33cc33;">
+                    <i class="fas fa-sticky-note"></i> My Sticky Notes
+                </a>
+                <a href="my-thoughts.html" class="nav-link" style="background-color: #ccffff; color: #3399ff;">
+                    <i class="fas fa-comment"></i> મારા વિચારો
+                </a>
+                <a href="drawing.html" class="nav-link" style="background-color: #e6e6ff; color: #9933cc;">
+                    <i class="fas fa-paint-brush"></i> Drawing Board
+                </a>
             </nav>
         </div>
     </header>
 
-
-    <!-- Main Content with Funky Cards -->
-    <main>
+    <!-- Main Content -->
+    <main class="homepage-wrapper">
         <div class="card-container">
-            <div class="funky-card card1">
-                <h2>About Me</h2>
-                <p>Heya! I’m Lily, 3, and I’m all about giggles, cuddles, and chasing rainbows!</p>
-                <a href="/blog-post.html" class="card-link">Dive In!</a>
+            <!-- Card 1: About Me -->
+            <div class="funky-card" style="background: linear-gradient(135deg, #ffccff, #ffb3ff);">
+                <h2 style="color: #ff3366;">About Me</h2>
+                <i class="fas fa-child card-icon square-shadow" style="color: #ff3366;"></i>
+                <p style="color: #2b2b2b;">Heya! I’m Lily, 3, and I’m all about giggles, cuddles, and chasing rainbows!</p>
+                <a href="/blog-post.html" class="card-link" style="background-color: #ff3366; color: #fff;">Dive In!</a>
             </div>
-            <div class="funky-card card2">
-                <h2>Yummy Stuff I Eat</h2>
-                <p>I gobble up cookies, squishy fruits, and anything messy—yum yum!</p>
-                <a href="/my-digital.html" class="card-link">Taste It!</a>
+            <!-- Card 2: My Digital -->
+            <div class="funky-card" style="background: linear-gradient(135deg, #ccffcc, #b3ffb3);">
+                <h2 style="color: #33cc33;">My Digital</h2>
+                <i class="fas fa-cookie-bite card-icon round-border-shadow" style="color: #33cc33;"></i>
+                <p style="color: #2b2b2b;">I gobble up cookies, squishy fruits, and anything messy—yum yum!</p>
+                <a href="/my-digital.html" class="card-link" style="background-color: #33cc33; color: #fff;">Taste It!</a>
             </div>
-            <div class="funky-card card3">
-                <h2>Places I’ve Explored</h2>
-                <p>From parks to puddles, I’ve been on some wild rides with Daddy!</p>
-                <a href="/schooling.html" class="card-link">Adventure On!</a>
+            <!-- Card 3: My Schooling -->
+            <div class="funky-card" style="background: linear-gradient(135deg, #ccffff, #b3ffff);">
+                <h2 style="color: #3399ff;">My Schooling</h2>
+                <i class="fas fa-tree card-icon square-tilt-shadow" style="color: #3399ff;"></i>
+                <p style="color: #2b2b2b;">From parks to puddles, I’ve been on some wild rides with Daddy!</p>
+                <a href="/photo-gallery.html" class="card-link" style="background-color: #3399ff; color: #fff;">Adventure On!</a>
             </div>
-        </div>
-        <div class="card-container">
-            <div class="funky-card card3">
-                <h2>Places I’ve Explored</h2>
-                <p>From parks to puddles, I’ve been on some wild rides with Daddy!</p>
-                <a href="/photo-gallery.html" class="card-link">Adventure On!</a>
+            <!-- Card 4: Photo Gallery -->
+            <div class="funky-card" style="background: linear-gradient(135deg, #ffebcc, #ffdb99);">
+                <h2 style="color: #ff9933;">Photo Gallery</h2>
+                <i class="fas fa-camera card-icon round-glow" style="color: #ff9933;"></i>
+                <p style="color: #2b2b2b;">From parks to puddles, I’ve been on some wild rides with Daddy!</p>
+                <a href="/schooling.html" class="card-link" style="background-color: #ff9933; color: #fff;">Adventure On!</a>
+            </div>
+            <!-- Card 5: My Notes -->
+            <div class="funky-card" style="background: linear-gradient(135deg, #ffcccc, #ffb3b3);">
+                <h2 style="color: #cc3333;">My Notes</h2>
+                <i class="fas fa-sticky-note card-icon square-dashed-shadow" style="color: #cc3333;"></i>
+                <p style="color: #2b2b2b;">From parks to puddles, I’ve been on some wild rides with Daddy!</p>
+                <a href="/fill-the-blank.html" class="card-link" style="background-color: #cc3333; color: #fff;">Adventure On!</a>
+            </div>
+            <!-- Card 6: My Schooling -->
+            <div class="funky-card" style="background: linear-gradient(135deg, #e6e6ff, #ccccff);">
+                <h2 style="color: #9933cc;">My Schooling</h2>
+                <i class="fas fa-book card-icon round-border-glow" style="color: #9933cc;"></i>
+                <p style="color: #2b2b2b;">From parks to puddles, I’ve been on some wild rides with Daddy!</p>
+                <a href="/my-belief.html" class="card-link" style="background-color: #9933cc; color: #fff;">Adventure On!</a>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer>
-        <p>© 2025 Lily’s Wild World | Daddy’s Funky Tales</p>
-    </footer>
-    <script src="scripts.js"></script>
+<footer>
+    <p>© 2025 Aarvi’s Wild World | Daddy’s Funky Tales</p>
+    <div class="social-icons">
+        <p class="funny-text">I’m only 3, so no social media for me! Papa says I can have cookies instead 🍪 Follow him for my adventures!</p>
+        <div class="icon-container">
+            <a href="https://www.facebook.com" class="social-link" onclick="showSocialPopup(event)">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.linkedin.com" class="social-link" onclick="showSocialPopup(event)">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.twitter.com" class="social-link" onclick="showSocialPopup(event)">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Social Pop-up -->
+<div class="social-popup" id="socialPopup">
+    <div class="social-popup-content">
+        <p>बोला तो सही कि मेरा अकाउंट नहीं बन सकता, मैं अभी छोटी हूँ 😊</p>
+        <button class="close-social-btn" onclick="closeSocialPopup()">Close</button>
+    </div>
+</div>
+
+    <!-- WhatsApp Chat Icon -->
+    <div class="whatsapp-icon" onclick="showChatPopup()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- WhatsApp Chat Pop-up -->
+    <div class="chat-popup" id="chatPopup">
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <i class="fas fa-arrow-left" onclick="closeChatPopup()"></i>
+            <div class="profile-pic"></div>
+            <div class="chat-info">
+                <h3>Aarvi</h3>
+                <p>last seen today 11:20 AM</p>
+            </div>
+            <i class="fas fa-phone"></i>
+            <i class="fas fa-ellipsis-v"></i>
+        </div>
+        <!-- Chat Body -->
+        <div class="chat-body">
+            <div class="date-separator">
+                <span>TODAY</span>
+            </div>
+            <div class="chat-message incoming">
+                नमस्ते आरवी! 😊 क्या हाल है?
+                <span class="timestamp">16:33</span>
+            </div>
+            <div class="chat-message outgoing">
+                हाय! मैं आरवी हूँ! मैं तो मस्त हूँ, तुम कैसे हो? 🐻
+                <span class="timestamp">16:40</span>
+            </div>
+            <div class="unread-indicator">
+                <span>1 UNREAD MESSAGE</span>
+            </div>
+            <div class="chat-message incoming">
+                अरे, मैंने सोचा कि आज पार्क में जायें? 🕔
+                <span class="timestamp">17:00</span>
+            </div>
+            <div class="chat-message outgoing">
+                हाहा, मैंने पापा से पूछा तो वो बोले, "आरवी, तुम्हें चॉकलेट खानी है ना?" 🍫 ये घरवाले कैसे भी मना लेते हैं ना! 😊
+                <span class="timestamp">17:01</span>
+            </div>
+            <div class="chat-message custom">
+                मेरे पापा मना कर रहे हैं!😊
+                <button onclick="goToDrawing()">Draw with me instead! 🎨</button>
+                <span class="timestamp">17:02</span>
+            </div>
+            <button class="close-chat-btn" onclick="closeChatPopup()">Close Chat</button>
+        </div>
+        <!-- Chat Input (Non-functional) -->
+        <div class="chat-input">
+            <i class="fas fa-smile"></i>
+            <input type="text" placeholder="Type a message">
+            <i class="fas fa-paperclip"></i>
+            <i class="fas fa-microphone send-btn"></i>
+        </div>
+    </div>
+
+    <!-- Audio for Giggle Sound -->
+    <audio id="giggleSound">
+        <source src="https://www.myinstants.com/media/sounds/giggle.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- JavaScript for Chat Pop-up -->
+    <script>
+        const chatPopup = document.getElementById('chatPopup');
+        const giggleSound = document.getElementById('giggleSound');
+
+        function showChatPopup() {
+            giggleSound.currentTime = 0;
+            giggleSound.play();
+            chatPopup.style.display = 'block';
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.8, x: 0.9 }
+            });
+            const chatBody = document.querySelector('.chat-body');
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function closeChatPopup() {
+            chatPopup.style.display = 'none';
+        }
+
+        function goToDrawing() {
+            window.location.href = 'drawing.html';
+        }
+
+        // Social Pop-up Functions
+const socialPopup = document.getElementById('socialPopup');
+
+function showSocialPopup(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    giggleSound.currentTime = 0;
+    giggleSound.play();
+    socialPopup.style.display = 'block';
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.5, x: 0.5 }
+    });
+}
+
+function closeSocialPopup() {
+    socialPopup.style.display = 'none';
+}
+    </script>
 </body>
 </html>

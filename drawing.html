@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sticker & Drawing Board - Aarvi’s World</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts for Permanent Marker and Caveat -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0); /* Light gradient background */
+            font-family: 'Caveat', cursive;
+        }
+
+        /* Header Styles (Scoped to .homepage-header) */
+        .homepage-header {
+            background: linear-gradient(135deg, #ffebcc, #ffd699); /* Light orange gradient */
+            padding: 20px 40px;
+            margin: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 4px dashed #ff3366; /* Playful dashed border */
+        }
+
+        .homepage-header .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* Space between title and nav */
+        }
+
+        .homepage-header h1 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 40px;
+            margin: 0;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ffccff, #ffb3ff); /* Pink gradient */
+            border: 3px dashed #2b2b2b;
+            border-radius: 15px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px; /* Space between icon and text */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .homepage-header h1:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .homepage-header h1 i {
+            font-size: 35px;
+        }
+
+        .homepage-header .funky-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px; /* Space between nav links */
+        }
+
+        .homepage-header .nav-link {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Space between icon and text */
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .homepage-header .nav-link:hover {
+            transform: scale(1.1) translateY(-3px);
+        }
+
+        /* Drawing Board Styles */
+        .drawing-container {
+            text-align: center;
+            padding: 30px;
+            max-width: 800px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #ffccff, #ffb3ff); /* Pink gradient */
+            border: 4px dashed #2b2b2b;
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .drawing-container h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 32px;
+            color: #ff3366;
+            margin-bottom: 20px;
+        }
+
+        #drawingCanvas {
+            background: #fff;
+            border: 3px dashed #2b2b2b;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+        }
+
+        .tools, .stickers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tools button, .stickers button {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .tools button:hover, .stickers button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Color buttons */
+        .tools button:nth-child(1) { background-color: #ff3366; color: #fff; } /* Red */
+        .tools button:nth-child(2) { background-color: #33cc33; color: #fff; } /* Green */
+        .tools button:nth-child(3) { background-color: #3399ff; color: #fff; } /* Blue */
+        .tools button:nth-child(4) { background-color: #ff9933; color: #fff; } /* Orange */
+        .tools button:nth-child(5) { background-color: #9933cc; color: #fff; } /* Purple */
+        .tools button:nth-child(6) { background-color: #cc3333; color: #fff; } /* Clear */
+
+        /* Sticker buttons */
+        .stickers button {
+            font-size: 24px;
+            padding: 10px 15px;
+            background-color: #ccffff;
+            color: #3399ff;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #ffebcc, #ffd699);
+            border-top: 4px dashed #ff3366;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            color: #2b2b2b;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="homepage-header">
+        <div class="nav-container">
+            <h1 style="color: #ff3366;">
+                <i class="fas fa-star" style="color: #ff3366;"></i> Aarvi’s World
+            </h1>
+            <nav class="funky-nav">
+                <a href="index.html" class="nav-link" style="background-color: #ffccff; color: #ff3366;">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="blog-post.html" class="nav-link" style="background-color: #ccffcc; color: #33cc33;">
+                    <i class="fas fa-blog"></i> Blog
+                </a>
+                <a href="my-digital.html" class="nav-link" style="background-color: #ccffff; color: #3399ff;">
+                    <i class="fas fa-cookie-bite"></i> My Digital
+                </a>
+                <a href="photo-gallery.html" class="nav-link" style="background-color: #ffebcc; color: #ff9933;">
+                    <i class="fas fa-camera"></i> Gallery
+                </a>
+                <a href="schooling.html" class="nav-link" style="background-color: #ffcccc; color: #cc3333;">
+                    <i class="fas fa-school"></i> Schooling
+                </a>
+                <a href="fill-the-blank.html" class="nav-link" style="background-color: #e6e6ff; color: #9933cc;">
+                    <i class="fas fa-pen"></i> Fill-the-Blank
+                </a>
+                <a href="my-belief.html" class="nav-link" style="background-color: #ffccff; color: #ff3366;">
+                    <i class="fas fa-heart"></i> My Belief
+                </a>
+                <a href="sticky-notes.html" class="nav-link" style="background-color: #ccffcc; color: #33cc33;">
+                    <i class="fas fa-sticky-note"></i> My Sticky Notes
+                </a>
+                <a href="my-thoughts.html" class="nav-link" style="background-color: #ccffff; color: #3399ff;">
+                    <i class="fas fa-comment"></i> મારા વિચારો
+                </a>
+                <a href="drawing.html" class="nav-link" style="background-color: #e6e6ff; color: #9933cc;">
+                    <i class="fas fa-paint-brush"></i> Drawing Board
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Drawing Board -->
+    <main>
+        <div class="drawing-container">
+            <h2>Draw with Aarvi! 🎨</h2>
+            <canvas id="drawingCanvas"></canvas>
+            <div class="tools">
+                <button onclick="changeColor('#ff3366')">Red</button>
+                <button onclick="changeColor('#33cc33')">Green</button>
+                <button onclick="changeColor('#3399ff')">Blue</button>
+                <button onclick="changeColor('#ff9933')">Orange</button>
+                <button onclick="changeColor('#9933cc')">Purple</button>
+                <button onclick="clearCanvas()">Clear Canvas</button>
+            </div>
+            <div class="stickers">
+                <button onclick="addSticker('⭐')">Star</button>
+                <button onclick="addSticker('❤️')">Heart</button>
+                <button onclick="addSticker('🐻')">Bear</button>
+                <button onclick="addSticker('🌈')">Rainbow</button>
+                <button onclick="addSticker('🦋')">Butterfly</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Lily’s Wild World | Daddy’s Funky Tales</p>
+    </footer>
+
+    <!-- JavaScript for Drawing and Stickers -->
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size
+        canvas.width = 600;
+        canvas.height = 400;
+
+        // Adjust canvas size for smaller screens
+        if (window.innerWidth < 600) {
+            canvas.width = window.innerWidth - 60; // Adjust for padding
+            canvas.height = 300;
+        }
+
+        let drawing = false;
+        let color = '#ff3366'; // Default color
+        let stickers = []; // Array to store sticker positions
+
+        // Drawing functionality
+        canvas.addEventListener('mousedown', () => {
+            drawing = true;
+            ctx.beginPath(); // Start a new path
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            drawing = false;
+            ctx.beginPath();
+        });
+
+        canvas.addEventListener('mousemove', draw);
+
+        function draw(event) {
+            if (!drawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            ctx.lineWidth = 5;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = color;
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+
+            // Redraw stickers to ensure they stay on top
+            redrawStickers();
+        }
+
+        // Change drawing color
+        function changeColor(newColor) {
+            color = newColor;
+        }
+
+        // Add a sticker at a random position
+        function addSticker(sticker) {
+            const x = Math.random() * (canvas.width - 30); // Adjust for sticker size
+            const y = Math.random() * (canvas.height - 30);
+            stickers.push({ emoji: sticker, x, y });
+            redrawCanvas();
+        }
+
+        // Clear the canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stickers = []; // Clear stickers
+        }
+
+        // Redraw the canvas with stickers
+        function redrawCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            redrawStickers();
+        }
+
+        // Redraw all stickers
+        function redrawStickers() {
+            stickers.forEach(sticker => {
+                ctx.font = '30px Arial';
+                ctx.fillText(sticker.emoji, sticker.x, sticker.y);
+            });
+        }
+    </script>
+</body>
+</html>

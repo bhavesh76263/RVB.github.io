@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Thoughts - Lily’s Wild World</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assumes linking to existing styles.css -->
+    <style>
+        /* Layout Styles */
+        .thoughts-layout {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            gap: 40px;
+        }
+
+        /* Left Side: Main Content */
+        .main-content {
+            flex: 1;
+            min-width: 60%;
+        }
+
+        /* Content Boxes (Styled like blog-post.html) */
+        .thought-box {
+            padding: 30px;
+            border: 6px solid #2b2b2b;
+            border-radius: 15px;
+            transform: rotate(-3deg);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .thought-box h3 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px #ffd700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .thought-box p {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            line-height: 1.5;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Image Styles */
+        .thought-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        /* Effect 1: Square with Shadow */
+        .thought-image.square-shadow {
+            border-radius: 0;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Effect 2: Round with Border and Shadow */
+        .thought-image.round-border-shadow {
+            border-radius: 50%;
+            border: 4px solid #ff3366;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Effect 3: Square with Tilt and Shadow */
+        .thought-image.square-tilt-shadow {
+            border-radius: 0;
+            transform: rotate(5deg);
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Effect 4: Round with Glow */
+        .thought-image.round-glow {
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ffd700, 0 0 25px #ff99cc;
+        }
+
+        /* Effect 5: Square with Dashed Border and Shadow */
+        .thought-image.square-dashed-shadow {
+            border-radius: 0;
+            border: 3px dashed #33cccc;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Right Sidebar: Sticky Notes */
+        .sidebar {
+            flex: 0 0 30%;
+            min-width: 300px;
+            background: url('https://www.transparenttextures.com/patterns/cork-board.png') repeat;
+            background-color: #d2b48c;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .sticky-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sticky-note {
+            min-width: 200px;
+            max-width: 100%;
+            width: fit-content;
+            height: auto;
+            background: #fffacd;
+            border: 2px solid #2b2b2b;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4),
+                        8px 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 50px 25px 25px 25px;
+            transform: rotate(2deg);
+            transition: transform 0.5s, box-shadow 0.3s;
+            cursor: pointer;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            background-blend-mode: overlay;
+            opacity: 0.95;
+        }
+
+        .sticky-note:nth-child(2) {
+            background: #f0fff0;
+            transform: rotate(-3deg);
+        }
+
+        .sticky-note:nth-child(3) {
+            background: #ffe4e1;
+            transform: rotate(1deg);
+        }
+
+        .pin {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%) rotate(5deg);
+            width: 50px;
+            height: 50px;
+            background: url('pngimg.png') no-repeat center;
+            background-size: contain;
+            z-index: 1;
+            filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+        }
+
+        .sticky-note:hover {
+            transform: rotate(0deg) scale(1.1);
+            box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5),
+                        15px 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .sticky-text {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(20px, 3vw, 28px);
+            color: #2b2b2b;
+            text-align: center;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+            word-wrap: break-word;
+            transform: rotate(-1deg);
+        }
+
+        .wiggle {
+            animation: wiggle 0.5s ease;
+        }
+
+        @keyframes wiggle {
+            0% { transform: rotate(2deg); }
+            25% { transform: rotate(-2deg) scale(1.05); }
+            50% { transform: rotate(2deg) scale(1.1); }
+            75% { transform: rotate(-2deg) scale(1.05); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>My Thoughts</h1>
+        <p>Scribbled by Daddy with Lots of Love!</p>
+    </header>
+
+    <!-- Main Layout: Two Columns -->
+    <main>
+        <div class="thoughts-layout">
+            <!-- Left Side: Main Content -->
+            <div class="main-content">
+                <!-- Thought Box 1: Bubble Chase -->
+                <div class="thought-box" style="background-color: #fff; color: #2b2b2b;">
+                    <h3 style="color: #ff3366;">Bubble Chase Mania!</h3>
+                    <img src="https://images.unsplash.com/photo-1599447471972-67e0d34c53e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Bubbles in the air" class="thought-image square-shadow">
+                    <p style="color: #2b2b2b;">Lily ran around the park chasing bubbles today! She laughed so hard when one popped on her nose. “More bubbles, Daddy!” she shouted.</p>
+                </div>
+                <!-- Thought Box 2: Muddy Puddle Fun -->
+                <div class="thought-box" style="background-color: #e6f0fa; color: #2b2b2b;">
+                    <h3 style="color: #33cccc;">Muddy Puddle Fun!</h3>
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Child splashing in puddle" class="thought-image round-border-shadow">
+                    <p style="color: #2b2b2b;">Lily found a big puddle and jumped right in! Mud everywhere, but her giggles were unstoppable. “I’m a muddy monster!” she roared.</p>
+                </div>
+                <!-- Thought Box 3: Teddy Bear Picnic -->
+                <div class="thought-box" style="background-color: #fff0f5; color: #2b2b2b;">
+                    <h3 style="color: #ff99cc;">Teddy Bear Picnic!</h3>
+                    <img src="https://images.unsplash.com/photo-1599493748201-2d7a7e2a6f22?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Teddy bear picnic setup" class="thought-image square-tilt-shadow">
+                    <p style="color: #2b2b2b;">We had a picnic with Lily’s teddy bears in the living room. She served them cookies and juice, saying, “Teddy is so hungry!”</p>
+                </div>
+                <!-- Thought Box 4: Dancing in the Rain -->
+                <div class="thought-box" style="background-color: #f0fff0; color: #2b2b2b;">
+                    <h3 style="color: #66ff99;">Dancing in the Rain!</h3>
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Rainy day" class="thought-image round-glow">
+                    <p style="color: #2b2b2b;">It rained today, and Lily wanted to dance outside! We twirled under the umbrella, and she sang, “Rain, rain, make me spin!”</p>
+                </div>
+                <!-- Thought Box 5: Painting Party -->
+                <div class="thought-box" style="background-color: #fff; color: #2b2b2b;">
+                    <h3 style="color: #9999ff;">Painting Party!</h3>
+                    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150&q=80" alt="Child painting" class="thought-image square-dashed-shadow">
+                    <p style="color: #2b2b2b;">Lily got out her paints and made a masterpiece—mostly on her hands! She said, “Look, Daddy, I’m a rainbow!”</p>
+                </div>
+            </div>
+
+            <!-- Right Sidebar: Sticky Notes -->
+            <aside class="sidebar">
+                <div class="sticky-grid">
+                    <!-- Note 1 -->
+                    <div class="sticky-note">
+                        <div class="pin"></div>
+                        <div class="sticky-text">I love splashing in puddles!</div>
+                    </div>
+                    <!-- Note 2 -->
+                    <div class="sticky-note">
+                        <div class="pin"></div>
+                        <div class="sticky-text">Cookies are my best friends</div>
+                    </div>
+                    <!-- Note 3 -->
+                    <div class="sticky-note">
+                        <div class="pin"></div>
+                        <div class="sticky-text">Daddy’s hugs make everything better every day</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <a href="index.html" class="back-link">Back to the Wild!</a>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Lily’s Wild World | Daddy’s Funky Tales</p>
+    </footer>
+
+    <!-- JavaScript for Interaction -->
+    <script src="scripts.js"></script> <!-- Assumes linking to existing scripts.js -->
+    <script>
+        // Add wiggle animation on hover for sticky notes
+        document.querySelectorAll('.sticky-note').forEach(note => {
+            note.addEventListener('mouseenter', () => {
+                note.classList.add('wiggle');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'924d919ecd65dd1c',t:'MTc0MjcyOTEzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
